@@ -154,7 +154,7 @@ def helper_receptor(receps=None):
 # outputs:  basestim = base stimulus parameter dictionary
 
 
-def helper_basestim(base=dict()):
+def helper_basestim(base=dict()): #external/base stimulation for each pop
 
     basestim = {'FSI': {
         'FreqExt_AMPA': 3.6,

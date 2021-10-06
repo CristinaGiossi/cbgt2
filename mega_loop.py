@@ -66,7 +66,10 @@ def mega_loop(self):
 
     while self.trial_num < self.n_trials:
         agent.extstim = agent.gain * presented_stimulus * self.maxstim  # TODO: make 3.0 a param
+        print('agent.extstim', agent.extstim)
+        print('agent.gain', agent.gain)
         agent.ramping_extstim = agent.ramping_extstim * 0.9 + agent.extstim * 0.1
+        print('agent.ramping_extstim', agent.ramping_extstim)
         for action_idx in range(len(actionchannels)):
             popid = agent.in_popids[action_idx]
             agent.FreqExt_AMPA[popid] = np.ones(len(agent.FreqExt_AMPA[popid])) * agent.ramping_extstim[action_idx]
@@ -77,6 +80,7 @@ def mega_loop(self):
 
         if agent.phase == 0:
             gateFRs = agent.rollingbuffer[agent.out_popids].mean(1) / untrace(list(popdata['N'][agent.out_popids])) / agent.dt * 1000
+            print('gateFRs', gateFRs)
             thresholds_crossed = np.where(gateFRs > 30)[0]
             if len(thresholds_crossed) > 0 or agent.phasetimer > 1000:
 
